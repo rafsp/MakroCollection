@@ -3,27 +3,145 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makro.Windows.DesktopService", "Makro.Windows.DesktopService\Makro.Windows.DesktopService.csproj", "{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makro.Windows.DesktopService.Core", "Makro.Windows.DesktopService.Core\Makro.Windows.DesktopService.Core.csproj", "{7930E14C-890A-4332-8C62-363C7688E139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makro.Windows.DesktopService.Console", "Makro.Windows.DesktopService.Console\Makro.Windows.DesktopService.Console.csproj", "{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{05CF9A46-BA31-4D68-9822-4417BD57718E} = {05CF9A46-BA31-4D68-9822-4417BD57718E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5F1641DC-966E-4188-B691-6536F29903AF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makro.Windows.DesktopService.DataAccess", "Makro.Windows.DesktopService.DataAccess\Makro.Windows.DesktopService.DataAccess.csproj", "{05CF9A46-BA31-4D68-9822-4417BD57718E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{85FD6023-6992-4E4A-A4FD-4A799B58EE83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makro.Windows.DesktopService.DataAccess.Tests", "Makro.Windows.DesktopService.DataAccess.Tests\Makro.Windows.DesktopService.DataAccess.Tests.csproj", "{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72C4C821-99BA-4C54-9FAA-124B18029FA6}"
+	ProjectSection(SolutionItems) = preProject
+		DesktopService.vsmdi = DesktopService.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makro.Windows.DesktopService.Core.Tests", "Makro.Windows.DesktopService.Core.Tests\Makro.Windows.DesktopService.Core.Tests.csproj", "{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://brsptfs001:8080/tfs/makrocollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Makro.Windows.DesktopService\\Makro.Windows.DesktopService.csproj
 		SccProjectName1 = Makro.Windows.DesktopService
 		SccLocalPath1 = Makro.Windows.DesktopService
+		SccProjectUniqueName2 = Makro.Windows.DesktopService.Core\\Makro.Windows.DesktopService.Core.csproj
+		SccProjectName2 = Makro.Windows.DesktopService.Core
+		SccLocalPath2 = Makro.Windows.DesktopService.Core
+		SccProjectUniqueName3 = Makro.Windows.DesktopService.Console\\Makro.Windows.DesktopService.Console.csproj
+		SccProjectName3 = Makro.Windows.DesktopService.Console
+		SccLocalPath3 = Makro.Windows.DesktopService.Console
+		SccProjectUniqueName4 = Makro.Windows.DesktopService.DataAccess\\Makro.Windows.DesktopService.DataAccess.csproj
+		SccProjectName4 = Makro.Windows.DesktopService.DataAccess
+		SccLocalPath4 = Makro.Windows.DesktopService.DataAccess
+		SccProjectUniqueName5 = Makro.Windows.DesktopService.DataAccess.Tests\\Makro.Windows.DesktopService.DataAccess.Tests.csproj
+		SccProjectTopLevelParentUniqueName5 = DesktopService.sln
+		SccProjectName5 = Makro.Windows.DesktopService.DataAccess.Tests
+		SccLocalPath5 = Makro.Windows.DesktopService.DataAccess.Tests
+		SccProjectUniqueName6 = Makro.Windows.DesktopService.Core.Tests\\Makro.Windows.DesktopService.Core.Tests.csproj
+		SccProjectTopLevelParentUniqueName6 = DesktopService.sln
+		SccProjectName6 = Makro.Windows.DesktopService.Core.Tests
+		SccLocalPath6 = Makro.Windows.DesktopService.Core.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = DesktopService.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Debug|x86.ActiveCfg = Debug|x86
 		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Debug|x86.Build.0 = Debug|x86
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Release|Any CPU.ActiveCfg = Release|x86
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Release|x86.ActiveCfg = Release|x86
 		{FAC93ADD-2BCF-4B45-9E25-CC412161C50D}.Release|x86.Build.0 = Release|x86
+		{7930E14C-890A-4332-8C62-363C7688E139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Debug|x86.Build.0 = Debug|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7930E14C-890A-4332-8C62-363C7688E139}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Debug|x86.ActiveCfg = Debug|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Debug|x86.Build.0 = Debug|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Release|Any CPU.ActiveCfg = Release|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Release|x86.ActiveCfg = Release|x86
+		{3C4C9F9B-5E76-4E7E-AEA0-94FCE1E619F9}.Release|x86.Build.0 = Release|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Debug|x86.ActiveCfg = Debug|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Debug|x86.Build.0 = Debug|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Release|Any CPU.ActiveCfg = Release|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Release|x86.ActiveCfg = Release|x86
+		{05CF9A46-BA31-4D68-9822-4417BD57718E}.Release|x86.Build.0 = Release|x86
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F}.Release|x86.ActiveCfg = Release|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42030CC6-5C52-4278-BAC8-0B80C5D1D09F} = {85FD6023-6992-4E4A-A4FD-4A799B58EE83}
+		{72C4C821-99BA-4C54-9FAA-124B18029FA6} = {85FD6023-6992-4E4A-A4FD-4A799B58EE83}
+		{18EBFD58-1A66-47F0-9D6C-CF8EE6454B81} = {85FD6023-6992-4E4A-A4FD-4A799B58EE83}
 	EndGlobalSection
 EndGlobal
