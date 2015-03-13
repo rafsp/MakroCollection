@@ -15,21 +15,15 @@ namespace Makro.Windows.DesktopService.Core
     {
         public static StandardKernel DefaultKernel = new StandardKernel(new DI.DIModule());
 
-        public string ConnectionString { get; set; }
         public ILog Log { get; set; }
         public LogonHoursDataAccess LogonHoursDataAccess { get; set; }
         public ITerminalServicesManager TerminalServicesManager { get; set; }
         public ITerminalServer Server { get; set; }
 
-        public DesktopLockTask(string connectionString = "DesktopLockTaskConnectionString")
+        public DesktopLockTask()
         {
-            this.Log = LogManager.GetLogger(typeof(DesktopLockTask));
-            this.ConnectionString = connectionString;
-
-            this.LogonHoursDataAccess = DefaultKernel.Get<LogonHoursDataAccess>(
-                new ConstructorArgument("connectionString", connectionString, true)
-            );
-
+            this.Log = LogManager.GetLogger<DesktopLockTask>();
+            this.LogonHoursDataAccess = DefaultKernel.Get<LogonHoursDataAccess>();
             this.TerminalServicesManager = new TerminalServicesManager();
             this.Server = this.TerminalServicesManager.GetLocalServer();
         }

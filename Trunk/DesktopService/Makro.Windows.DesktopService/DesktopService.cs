@@ -19,7 +19,7 @@ namespace Makro.Windows.DesktopService
         {
             InitializeComponent();
             Scheduler = new CronScheduler();
-            var task = new DesktopLockTask("");
+            var task = new DesktopLockTask();
             Scheduler.AddTask(CronParser.ParseExpr("* * * * *"), task);
         }
 
