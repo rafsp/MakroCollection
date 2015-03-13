@@ -14,15 +14,21 @@ namespace Makro.Windows.DesktopService.Console
         {
             var log = LogManager.GetLogger(typeof(Program));
 
+            
             try
             {
-                var cs = new CronScheduler();
-                using (var dlt = new DesktopLockTask(Environment.UserName))
-                {
-                    cs.AddTask(CronParser.ParseExpr("*/5 18 * * *"), dlt);
-                    cs.Enable();
-                    System.Console.Read();
-                }
+                using (var dlt = new DesktopLockTask())
+                    dlt.Execute();
+              //  var cs = new CronScheduler();
+              //  using (var dlt = new DesktopLockTask())
+              //  {
+              //      //cs.AddTask(CronParser.ParseExpr("*/5 18 * * *"), dlt);
+              //      cs.AddTask(CronParser.ParseExpr("* * * * *"), dlt);
+              //      cs.Enable();
+              //      System.Console.Read();
+              //  }
+
+                System.Console.Read();
             }
             catch (Exception ex)
             {

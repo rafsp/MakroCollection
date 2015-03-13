@@ -28,6 +28,18 @@ namespace Makro.Windows.DesktopService
             Scheduler.Enable();
         }
 
+        protected override void OnPause()
+        {
+            base.OnPause();
+            Scheduler.Disable();
+        }
+
+        protected override void OnContinue()
+        {
+            base.OnContinue();
+            Scheduler.Enable();
+        }
+
         protected override void OnStop()
         {
             if (Scheduler != null)

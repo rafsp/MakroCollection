@@ -7,6 +7,7 @@ using Common.Logging;
 using Makro.Windows.DesktopService.DataAccess;
 using Ninject;
 using Ninject.Parameters;
+using Cassia;
 
 namespace Makro.Windows.DesktopService.Core
 {
@@ -14,22 +15,23 @@ namespace Makro.Windows.DesktopService.Core
     {
         public static StandardKernel DefaultKernel = new StandardKernel(new DI.DIModule());
 
-        public string Username { get; set; }
         public string ConnectionString { get; set; }
         public ILog Log { get; set; }
-        public SGIDataAccess SGIDataAccess { get; set; }
+        public LogonHoursDataAccess LogonHoursDataAccess { get; set; }
+        public ITerminalServicesManager TerminalServicesManager { get; set; }
+        public ITerminalServer Server { get; set; }
 
-        public DesktopLockTask(string user, string connectionString = "DesktopLockTaskConnectionString")
+        public DesktopLockTask(string connectionString = "DesktopLockTaskConnectionString")
         {
             this.Log = LogManager.GetLogger(typeof(DesktopLockTask));
-            this.Username = user;
             this.ConnectionString = connectionString;
 
-            this.SGIDataAccess = DefaultKernel.Get<SGIDataAccess>(
+            this.LogonHoursDataAccess = DefaultKernel.Get<LogonHoursDataAccess>(
                 new ConstructorArgument("connectionString", connectionString, true)
             );
 
-            Log.DebugFormat("User: {0}", this.Username);
+            this.TerminalServicesManager = new TerminalServicesManager();
+            this.Server = this.TerminalServicesManager.GetLocalServer();
         }
 
         public void Execute()
@@ -38,12 +40,22 @@ namespace Makro.Windows.DesktopService.Core
             {
                 Log.DebugFormat("Running task ...");
                 //TODO: Check if user is enabled to be blocked (query SGI)
-                var userMayBeLocked = SGIDataAccess.IsUserLockable(this.Username); //query
 
-                if (userMayBeLocked)
+                var allSessions = Server.GetSessions();
+                var activeConnections = allSessions.Where(s => s.ConnectionState == ConnectionState.Active);
+
+                foreach (var item in activeConnections)
                 {
-                    Log.DebugFormat("Locking user");
-                    Util.InternalLockWorkstation(true);
+                    var userMayBeLocked = LogonHoursDataAccess.IsUserLockable(item.UserName); //query
+                    if (userMayBeLocked)
+                    {
+                        Log.InfoFormat("Locking user: {0}", item.UserName);
+                        Util.InternalLockWorkstation(true);
+                    }
+                    else
+                    {
+                        Log.DebugFormat("User {0} not locked", item.UserName);
+                    }
                 }
 
                 Log.DebugFormat("Task finished");
@@ -56,7 +68,7 @@ namespace Makro.Windows.DesktopService.Core
 
         public void Dispose()
         {
-            this.SGIDataAccess.Dispose();
+            this.LogonHoursDataAccess.Dispose();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Makro.Windows.DesktopService.Core.DI
             var defaultDbProviderType = Type.GetType(defaultDbProvider);
 
             this.Bind<DbProviderFactory>().To(defaultDbProviderType);
-            this.Bind<SGIDataAccess>().To<SGIDataAccess>();
+            this.Bind<LogonHoursDataAccess>().To<LogonHoursDataAccess>();
         }
     }
 }
