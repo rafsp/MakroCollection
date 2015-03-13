@@ -13,12 +13,12 @@ namespace Makro.Windows.DesktopService.Core.DI
     {
         public override void Load()
         {
-            //Oracle.DataAccess.Client.OracleClientFactory
+            ////Oracle.DataAccess.Client.OracleClientFactory
             
-            var defaultDbProvider = ConfigurationManager.AppSettings["defaultDbProvider"];
-            var defaultDbProviderType = Type.GetType(defaultDbProvider);
+            //var defaultDbProvider = ConfigurationManager.AppSettings["defaultDbProvider"];
+            //var defaultDbProviderType = Type.GetType(defaultDbProvider);
 
-            this.Bind<DbProviderFactory>().To(defaultDbProviderType);
+            //this.Bind<DbProviderFactory>().To(defaultDbProviderType);
             this.Bind<LogonHoursDataAccess>().To<LogonHoursDataAccess>();
         }
     }

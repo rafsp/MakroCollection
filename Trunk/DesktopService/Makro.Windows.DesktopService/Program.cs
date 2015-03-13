@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using Common.Logging;
 
 namespace Makro.Windows.DesktopService
 {
@@ -13,12 +14,22 @@ namespace Makro.Windows.DesktopService
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-			{ 
-				new DesktopService() 
-			};
-            ServiceBase.Run(ServicesToRun);
+            var Log = LogManager.GetLogger(typeof(Program));
+            Log.Debug("Creating service context");
+
+            try
+            {
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[] 
+			    { 
+				    new DesktopService() 
+			    };
+                ServiceBase.Run(ServicesToRun);
+            }
+            catch(Exception ex) 
+            {
+                Log.Error(ex);
+            }
         }
     }
 }

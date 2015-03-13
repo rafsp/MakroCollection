@@ -28,7 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ServiceName = "Makro.Windows.DesktopService";
+            // 
+            // DesktopService
+            // 
+            this.CanPauseAndContinue = true;
+            this.ServiceName = "Makro.DesktopService";
+
         }
 
         #endregion
