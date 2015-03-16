@@ -64,8 +64,6 @@ namespace Makro.Windows.DesktopService.DataAccess
 
         private byte[] GetUserLogonHours(string user)
         {
-            user = "hnogueira";
-
             var path = "LDAP://DC=MAKRO,DC=COM,DC=BR";
             var root = new DirectoryEntry(path);
             var search = new DirectorySearcher(root);
