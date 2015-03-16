@@ -43,7 +43,7 @@ namespace Makro.Windows.DesktopService.Core
                     var userMayBeLocked = LogonHoursDataAccess.IsUserLockable(item.UserName); //query
                     if (userMayBeLocked)
                     {
-                        Log.InfoFormat("Locking user: {0}", item.UserName);
+                        Log.DebugFormat("Locking user: {0}", item.UserName);
                         Util.InternalLockWorkstation(true);
                     }
                     else
