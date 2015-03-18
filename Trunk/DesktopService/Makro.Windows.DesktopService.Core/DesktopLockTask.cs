@@ -46,6 +46,8 @@ namespace Makro.Windows.DesktopService.Core
 
                 foreach (var item in activeConnections)
                 {
+                    //EnsureAgent(item);
+
                     var userMayBeLocked = LogonHoursDataAccess.IsUserLockable(item.UserName); //query
                     if (userMayBeLocked)
                     {
@@ -55,8 +57,6 @@ namespace Makro.Windows.DesktopService.Core
                         new Timer(tc, item, 60 * 1000 * 10, System.Threading.Timeout.Infinite);
                         //item.Disconnect(true);
                         //Util.InternalLockWorkstation(true);
-
-                        EnsureAgent(item);
                     }
                     else
                     {
@@ -84,6 +84,7 @@ namespace Makro.Windows.DesktopService.Core
                 {
                     Log.Debug("DesktopService::OnStart::InitializingAgent");
                     var psi = new ProcessStartInfo(AppDomain.CurrentDomain.BaseDirectory + "\\" + agentImageName);
+                    psi.UseShellExecute = false;
                     psi.UserName = item.UserName;
                     this.ProcessList.Add(Process.Start(psi));
                 }
