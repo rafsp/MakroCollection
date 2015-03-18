@@ -12,6 +12,7 @@ using System.Threading;
 using Makro.Windows.DesktopService.Core.Service;
 using System.ServiceModel;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace Makro.Windows.DesktopService.Core
 {
@@ -33,6 +34,7 @@ namespace Makro.Windows.DesktopService.Core
             this.Server = this.TerminalServicesManager.GetLocalServer();
             this.ChannelFactory = new System.ServiceModel.ChannelFactory<IDesktopServiceHelper>("localEndpoint");
             this.ProcessList = new List<Process>();
+            this.LockDelay = int.Parse(ConfigurationManager.AppSettings["DesktopLockDelay"]);
         }
 
         public void Execute()
@@ -48,13 +50,13 @@ namespace Makro.Windows.DesktopService.Core
                 {
                     //EnsureAgent(item);
 
-                    var userMayBeLocked = LogonHoursDataAccess.IsUserLockable(item.UserName); //query
+                    var userMayBeLocked = LogonHoursDataAccess.IsUserLockable(item.UserName, this.LockDelay); //query
                     if (userMayBeLocked)
                     {
                         Log.DebugFormat("Locking user: {0}", item.UserName);
                         AddUserLock(item.UserName);
                         var tc = new TimerCallback(LockUser);
-                        new Timer(tc, item, 60 * 1000 * 10, System.Threading.Timeout.Infinite);
+                        new Timer(tc, item, 60 * 1000 * LockDelay, System.Threading.Timeout.Infinite);
                         //item.Disconnect(true);
                         //Util.InternalLockWorkstation(true);
                     }
@@ -132,5 +134,7 @@ namespace Makro.Windows.DesktopService.Core
             }
         }
         public System.ServiceModel.ChannelFactory<IDesktopServiceHelper> ChannelFactory { get; set; }
+
+        public int LockDelay { get; set; }
     }
 }

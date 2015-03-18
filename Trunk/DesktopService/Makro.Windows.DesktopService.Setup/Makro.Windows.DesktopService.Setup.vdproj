@@ -541,7 +541,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.Core, Version=1.0.1.27676, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.Core, Version=1.0.1.28253, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_84824D43165CFD4EF51C39C859207E92"
@@ -665,7 +665,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.DataAccess, Version=1.0.1.34123, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.DataAccess, Version=1.0.1.28253, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_D7A90546821F19A8F25FDF6517223CFD"
@@ -853,7 +853,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Makro Desktop Service"
         "ProductCode" = "8:{C1EC67CA-3DDF-4C18-86AB-22765D47BD85}"
-        "PackageCode" = "8:{87578A53-061C-4640-94AB-AD22DF7478D5}"
+        "PackageCode" = "8:{E254A846-E981-4641-AA81-3FCE664CBE80}"
         "UpgradeCode" = "8:{BABC6320-337B-4EC1-9087-127D889AD98B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -975,7 +975,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B589C7DD4E884C509139A2981C9A598C"
             {
-            "Name" = "8:Shortcut to Primary output from Makro.Windows.DesktopService.Agent (Active)"
+            "Name" = "8:Makro Desktop Service Agent"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

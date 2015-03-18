@@ -26,7 +26,7 @@ namespace Makro.Windows.DesktopService.DataAccess
             this.LogonHoursByUserCache = new Dictionary<string, byte[]>();
         }
 
-        public bool IsUserLockable(string user)
+        public bool IsUserLockable(string user, int delayInMinutes)
         {
             byte[] bytes = null;
             try
@@ -55,7 +55,7 @@ namespace Makro.Windows.DesktopService.DataAccess
 
             GetTodayWorkPeriod(bytes, out dtStart, out dtEnd);
 
-            if (DateTime.Now < dtStart || DateTime.Now > dtEnd)
+            if (DateTime.Now < dtStart || DateTime.Now.AddMinutes(delayInMinutes) > dtEnd)
                 return true;
 
 
