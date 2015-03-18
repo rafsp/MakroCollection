@@ -5,6 +5,7 @@ using System.Text;
 using Makro.Windows.DesktopService.Core;
 using Common.Logging;
 using CommonUtils.Cron;
+using System.ServiceModel;
 
 namespace Makro.Windows.DesktopService.Console
 {
@@ -14,11 +15,16 @@ namespace Makro.Windows.DesktopService.Console
         {
             var log = LogManager.GetLogger(typeof(Program));
 
+            System.Console.Write("Starting the helper service ...");
+            var sh = new ServiceHost(typeof(Makro.Windows.DesktopService.Core.Service.DesktopServiceHelper));
+            sh.Open();
+            System.Console.WriteLine("OK");
             
             try
             {
-                using (var dlt = new DesktopLockTask())
-                    dlt.Execute();
+              //  using (var dlt = new DesktopLockTask())
+              //      dlt.Execute();
+
               //  var cs = new CronScheduler();
               //  using (var dlt = new DesktopLockTask())
               //  {

@@ -9,6 +9,8 @@ using System.Text;
 using CommonUtils.Cron;
 using Makro.Windows.DesktopService.Core;
 using Common.Logging;
+using System.ServiceModel;
+using Makro.Windows.DesktopService.Core.Service;
 
 namespace Makro.Windows.DesktopService
 {
@@ -21,16 +23,28 @@ namespace Makro.Windows.DesktopService
             InitializeComponent();
 
             this.Log = LogManager.GetLogger(typeof(Program));
-            var task = new DesktopLockTask();
+            this.Task = new DesktopLockTask();
 
             this.Scheduler = new CronScheduler();
-            Scheduler.AddTask(CronParser.ParseExpr("* * * * *"), task);
+            Scheduler.AddTask(CronParser.ParseExpr("* * * * *"), Task);
         }
 
         protected override void OnStart(string[] args)
         {
             Log.Debug("DesktopService::OnStart");
             Scheduler.Enable();
+
+            try
+            {
+                var sh = new ServiceHost(typeof(DesktopServiceHelper));
+                sh.Open();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error opening the server");
+                Log.Error(ex);
+                throw;
+            }
         }
 
         protected override void OnPause()
@@ -55,8 +69,12 @@ namespace Makro.Windows.DesktopService
                 Scheduler.Disable();
                 Scheduler.Dispose();
             }
+
+            Task.Dispose();
         }
 
         public ILog Log { get; set; }
+
+        public DesktopLockTask Task { get; set; }
     }
 }

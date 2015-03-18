@@ -56,7 +56,7 @@ namespace Makro.Windows.DesktopService.DataAccess
             GetTodayWorkPeriod(bytes, out dtStart, out dtEnd);
 
             if (DateTime.Now < dtStart || DateTime.Now > dtEnd)
-                return false;
+                return true;
 
 
             return false;
