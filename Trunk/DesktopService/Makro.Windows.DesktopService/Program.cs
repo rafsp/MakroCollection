@@ -22,7 +22,7 @@ namespace Makro.Windows.DesktopService
                 ServiceBase[] ServicesToRun;
                 ServicesToRun = new ServiceBase[] 
 			    { 
-				    new DesktopService() 
+				    new DesktopService()
 			    };
                 ServiceBase.Run(ServicesToRun);
             }

@@ -20,11 +20,11 @@ namespace Makro.Windows.DesktopService
 
         public DesktopService()
         {
+            this.Log = LogManager.GetLogger(typeof(DesktopService));
+            Log.Debug("Ctor");
             InitializeComponent();
 
-            this.Log = LogManager.GetLogger(typeof(Program));
             this.Task = new DesktopLockTask();
-
             this.Scheduler = new CronScheduler();
             Scheduler.AddTask(CronParser.ParseExpr("* * * * *"), Task);
         }
@@ -32,6 +32,7 @@ namespace Makro.Windows.DesktopService
         protected override void OnStart(string[] args)
         {
             Log.Debug("DesktopService::OnStart");
+            Log.DebugFormat("Args: ", String.Join(" ", args));
             Scheduler.Enable();
 
             try

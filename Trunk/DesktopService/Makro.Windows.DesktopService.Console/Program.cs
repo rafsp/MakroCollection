@@ -25,6 +25,9 @@ namespace Makro.Windows.DesktopService.Console
                 using (var dlt = new DesktopLockTask())
                     dlt.Execute();
 
+                using (var dat = new DesktopAgentTask(Environment.UserName))
+                    dat.Execute();
+
               //  var cs = new CronScheduler();
               //  using (var dlt = new DesktopLockTask())
               //  {

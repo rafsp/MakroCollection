@@ -88,6 +88,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AgentInstaller.Designer.cs">
+      <DependentUpon>AgentInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopAgentService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DesktopAgentService.Designer.cs">
+      <DependentUpon>DesktopAgentService.cs</DependentUpon>
+    </Compile>
     <Compile Include="DesktopService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -117,6 +129,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AgentInstaller.resx">
+      <DependentUpon>AgentInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesktopAgentService.resx">
+      <DependentUpon>DesktopAgentService.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DesktopService.resx">
       <DependentUpon>DesktopService.cs</DependentUpon>
     </EmbeddedResource>
