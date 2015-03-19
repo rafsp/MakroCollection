@@ -112,11 +112,11 @@ namespace Makro.Windows.DesktopService.DataAccess.Tests
             var sgida = new LogonHoursDataAccess();
             try
             {
-                sgida.IsUserLockable(null);
+                sgida.IsUserLockable(null, 0);
             }
             catch (ArgumentNullException) { }
 
-            sgida.IsUserLockable("");
+            sgida.IsUserLockable("", 0);
         }
 
         [TestMethod]

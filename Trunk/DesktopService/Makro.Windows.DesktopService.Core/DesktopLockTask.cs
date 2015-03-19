@@ -26,6 +26,9 @@ namespace Makro.Windows.DesktopService.Core
         public ITerminalServer Server { get; set; }
         public List<Process> ProcessList { get; set; }
 
+
+        public Dictionary<String, Timer> Timers { get; set; }
+
         public DesktopLockTask()
         {
             this.Log = LogManager.GetLogger<DesktopLockTask>();
@@ -35,6 +38,7 @@ namespace Makro.Windows.DesktopService.Core
             this.ChannelFactory = new System.ServiceModel.ChannelFactory<IDesktopServiceHelper>("localEndpoint");
             this.ProcessList = new List<Process>();
             this.LockDelay = int.Parse(ConfigurationManager.AppSettings["DesktopLockDelay"]);
+            this.Timers = new Dictionary<string,Timer>();
         }
 
         public void Execute()
@@ -51,12 +55,13 @@ namespace Makro.Windows.DesktopService.Core
                     //EnsureAgent(item);
 
                     var userMayBeLocked = LogonHoursDataAccess.IsUserLockable(item.UserName, this.LockDelay); //query
-                    if (userMayBeLocked)
+                    if (userMayBeLocked && !Timers.ContainsKey(item.UserName))
                     {
                         Log.DebugFormat("Locking user: {0}", item.UserName);
                         AddUserLock(item.UserName);
                         var tc = new TimerCallback(LockUser);
-                        new Timer(tc, item, 60 * 1000 * LockDelay, System.Threading.Timeout.Infinite);
+                        var t = new Timer(tc, item, 60 * 1000 * LockDelay, System.Threading.Timeout.Infinite);
+                        Timers[item.UserName] = t;
                         //item.Disconnect(true);
                         //Util.InternalLockWorkstation(true);
                     }
@@ -120,6 +125,10 @@ namespace Makro.Windows.DesktopService.Core
             var s = state as ITerminalServicesSession;
             Log.DebugFormat("Performing lock for user: {0}", s.UserName);
             s.Disconnect(true);
+
+            var t = Timers[s.UserName];
+            t.Dispose();
+            Timers.Remove(s.UserName);
         }
 
         public void Dispose()
