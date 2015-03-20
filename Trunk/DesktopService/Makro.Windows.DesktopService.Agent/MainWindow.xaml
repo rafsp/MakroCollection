@@ -1,14 +1,16 @@
 ﻿<Window x:Class="Makro.Windows.DesktopService.Agent.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="300" Width="300" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="114" />
-            <RowDefinition Height="93*" />
-            <RowDefinition Height="54" />
-        </Grid.RowDefinitions>
-        <TextBlock ClipToBounds="False" Text="Devido às políticas da compania, sua estação será bloqueada em 10 minutos. Solicite autorização do seu gestor para continuar seu acesso." Grid.Row="1" Name="txtBlockWarning" UseLayoutRounding="False" TextWrapping="WrapWithOverflow" Margin="12" />
-        <Button Content="Ok" Grid.Row="2" Margin="12" Name="button1" Click="button1_Click" />
-    </Grid>
+        Title="MainWindow" Height="190" Width="300" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStartupLocation="CenterScreen" Background="White">
+
+    <Border Background="#FFCB333B">
+        <Grid  Margin="2" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock ClipToBounds="False" Text="Devido às políticas da compania, sua estação será bloqueada em 10 minutos. Solicite autorização do seu gestor para continuar seu acesso." Name="txtBlockWarning" UseLayoutRounding="False" TextWrapping="WrapWithOverflow" Margin="12" FontSize="16" />
+            <Button Content="Ok" Grid.Row="1" Margin="12" Name="button1" Click="button1_Click" FontSize="16"></Button>
+        </Grid>
+    </Border>
 </Window>

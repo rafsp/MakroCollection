@@ -38,6 +38,9 @@ namespace Makro.Windows.DesktopService.Agent
             var timerMins = ConfigurationManager.AppSettings["AddLockDurationMins"];
             var timerMS = int.Parse(timerMins) * 1000;
 
+            var warningLabel = ConfigurationManager.AppSettings["WarningText"];
+            this.txtBlockWarning.Text = String.Format(warningLabel, timerMins);
+
             this.Timer = new System.Timers.Timer(timerMS);
             this.Timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             this.Timer.Enabled = true;
