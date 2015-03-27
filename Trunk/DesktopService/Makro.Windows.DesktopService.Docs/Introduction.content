@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="362e7fd8-0751-433e-953a-2dfa13155a80" visible="True" isDefault="true" isExpanded="true" title="Introduction" tocTitle="Introduction" linkText="Documentation introduction">
+    <Topic id="c2a26dc2-d9f6-4e36-a301-b0c8ea6d5b6d" visible="True" isSelected="true" title="Makro Desktop Services dependencies (packages / components)" tocTitle="Dependencies (packages / components)" linkText="Makro Desktop Services dependencies (packages / components)">
+      <HelpKeywords>
+        <HelpKeyword index="K" term="packages" />
+        <HelpKeyword index="K" term="components" />
+        <HelpKeyword index="K" term="nuget" />
+      </HelpKeywords>
+    </Topic>
+  </Topic>
+</Topics>
