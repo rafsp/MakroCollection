@@ -12,10 +12,21 @@ using Common.Logging;
 
 namespace Makro.Windows.DesktopService
 {
+    /// <summary>
+    /// Windows Service that ensure a running agent process for each active users.
+    /// Serviço windows que garante a execução de um Agent para cada usuário ativo.
+    /// </summary>
     partial class DesktopAgentService : ServiceBase
     {
+        /// <summary>
+        /// The scheduler
+        /// </summary>
         CronScheduler Scheduler = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesktopAgentService"/> class.
+        /// 
+        /// </summary>
         public DesktopAgentService()
         {
             this.Log = LogManager.GetLogger(typeof(DesktopAgentService));
@@ -27,6 +38,11 @@ namespace Makro.Windows.DesktopService
             Scheduler.AddTask(CronParser.ParseExpr("* * * * *"), Task);
         }
 
+        /// <summary>
+        /// Starts the service
+        /// Starts the scheduler
+        /// </summary>
+        /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
             Log.Debug("DesktopAgent::OnStart");
@@ -34,6 +50,10 @@ namespace Makro.Windows.DesktopService
             this.Scheduler.Enable();
         }
 
+        /// <summary>
+        /// Stops the service
+        /// Stops the scheduler
+        /// </summary>
         protected override void OnStop()
         {
             Log.Debug("DesktopAgent::OnStop");
@@ -42,8 +62,20 @@ namespace Makro.Windows.DesktopService
             this.Task.Dispose();
         }
 
+        /// <summary>
+        /// Gets or sets the task.
+        /// </summary>
+        /// <value>
+        /// The task.
+        /// </value>
         public DesktopAgentTask Task { get; set; }
 
+        /// <summary>
+        /// Gets or sets the log.
+        /// </summary>
+        /// <value>
+        /// The log.
+        /// </value>
         public ILog Log { get; set; }
     }
 }

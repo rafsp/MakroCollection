@@ -14,10 +14,20 @@ using Makro.Windows.DesktopService.Core.Service;
 
 namespace Makro.Windows.DesktopService
 {
+    /// <summary>
+    /// Windows Service that monitors and disconnects the current active user when AD LogonHours field for that user indicates the disabled state.
+    /// Serviço windows que monitora e desconecta o usuário ativo quando o campo LogonHours do AD para esse usuário apresenta o estado desabilitado.
+    /// </summary>
     partial class DesktopService : ServiceBase
     {
+        /// <summary>
+        /// The scheduler
+        /// </summary>
         CronScheduler Scheduler = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesktopService"/> class.
+        /// </summary>
         public DesktopService()
         {
             this.Log = LogManager.GetLogger(typeof(DesktopService));
@@ -29,6 +39,12 @@ namespace Makro.Windows.DesktopService
             Scheduler.AddTask(CronParser.ParseExpr("* * * * *"), Task);
         }
 
+        /// <summary>
+        /// Starts the service
+        /// Enables the verification scheduler(timer)
+        /// Opens the helper service to send notifications to.
+        /// </summary>
+        /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
             Log.Debug("DesktopService::OnStart");
@@ -48,6 +64,9 @@ namespace Makro.Windows.DesktopService
             }
         }
 
+        /// <summary>
+        /// Disables the scheduler
+        /// </summary>
         protected override void OnPause()
         {
             Log.Debug("DesktopService::OnPause");
@@ -55,6 +74,9 @@ namespace Makro.Windows.DesktopService
             Scheduler.Disable();
         }
 
+        /// <summary>
+        /// Enables the scheduler
+        /// </summary>
         protected override void OnContinue()
         {
             Log.Debug("DesktopService::OnContinue");
@@ -62,6 +84,10 @@ namespace Makro.Windows.DesktopService
             Scheduler.Enable();
         }
 
+        /// <summary>
+        /// Stops the service
+        /// Disables the scheduler
+        /// </summary>
         protected override void OnStop()
         {
             Log.Debug("DesktopService::OnStop");
@@ -74,8 +100,20 @@ namespace Makro.Windows.DesktopService
             Task.Dispose();
         }
 
+        /// <summary>
+        /// Gets or sets the log.
+        /// </summary>
+        /// <value>
+        /// The log.
+        /// </value>
         public ILog Log { get; set; }
 
+        /// <summary>
+        /// Gets or sets the task.
+        /// </summary>
+        /// <value>
+        /// The task.
+        /// </value>
         public DesktopLockTask Task { get; set; }
     }
 }

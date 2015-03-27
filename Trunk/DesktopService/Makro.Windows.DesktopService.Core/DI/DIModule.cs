@@ -9,8 +9,15 @@ using Makro.Windows.DesktopService.DataAccess;
 
 namespace Makro.Windows.DesktopService.Core.DI
 {
+    /// <summary>
+    /// Dependency injection module.
+    /// Módulo de DI padrão.
+    /// </summary>
     public class DIModule : NinjectModule
     {
+        /// <summary>
+        /// Loads the module into the kernel.
+        /// </summary>
         public override void Load()
         {
             ////Oracle.DataAccess.Client.OracleClientFactory

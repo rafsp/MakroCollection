@@ -7,6 +7,10 @@ using Common.Logging;
 
 namespace Makro.Windows.DesktopService
 {
+    /// <summary>
+    /// Service executable.
+    /// Executável do serviço.
+    /// </summary>
     static class Program
     {
         /// <summary>

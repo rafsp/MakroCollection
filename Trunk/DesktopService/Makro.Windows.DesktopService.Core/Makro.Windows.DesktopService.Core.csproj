@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Makro.Windows.DesktopService.Core.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -79,9 +80,12 @@
     <Compile Include="DesktopAgentTask.cs" />
     <Compile Include="DesktopLockTask.cs" />
     <Compile Include="DI\DIModule.cs" />
+    <Compile Include="DI\NamespaceDoc.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\DesktopServiceHelper.cs" />
     <Compile Include="Service\IDesktopServiceHelper.cs" />
+    <Compile Include="Service\NamespaceDoc.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>

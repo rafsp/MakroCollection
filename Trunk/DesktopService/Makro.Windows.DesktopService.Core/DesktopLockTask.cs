@@ -16,18 +16,70 @@ using System.Configuration;
 
 namespace Makro.Windows.DesktopService.Core
 {
+    /// <summary>
+    /// Task for checking LogonHours info of each active user and locking(disconnecting) their session when necessary
+    /// Tarefa que checa o campo LogonHours de cara usuário ativo e bloqueia sua sessão quando necessário.
+    /// </summary>
     public class DesktopLockTask : ITask, IDisposable
     {
+        /// <summary>
+        /// Ninject DI kernel
+        /// Kernel de DI do Ninject
+        /// </summary>
         public static StandardKernel DefaultKernel = new StandardKernel(new DI.DIModule());
 
+        /// <summary>
+        /// Gets or sets the log.
+        /// Obtém ou atribui o objeto de log.
+        /// </summary>
+        /// <value>
+        /// The log.
+        /// Objeto de log.
+        /// </value>
         public ILog Log { get; set; }
+        /// <summary>
+        /// Gets or sets the logon hours data access object.
+        /// Obtém ou atribui o objeto de acesso a dados do logon hours.
+        /// </summary>
+        /// <value>
+        /// The logon hours data access object.
+        /// O objeto de acesso a dados do logon hours
+        /// </value>
         public LogonHoursDataAccess LogonHoursDataAccess { get; set; }
+        /// <summary>
+        /// Gets or sets the terminal services manager.
+        /// Obtém ou atribui o gerenciador do Terminal Services.
+        /// </summary>
+        /// <value>
+        /// The terminal services manager.
+        /// Gerenciador do Terminal Services
+        /// </value>
         public ITerminalServicesManager TerminalServicesManager { get; set; }
+        /// <summary>
+        /// Gets or sets the terminal server info object.
+        /// Obtém ou atribui o objeto Terminal Server.
+        /// </summary>
+        /// <value>
+        /// The terminal server info object.
+        /// Objeto Terminal Server.
+        /// </value>
         public ITerminalServer Server { get; set; }
 
 
+        /// <summary>
+        /// Gets or sets the timers.
+        /// Obtém ou atribui os timers
+        /// </summary>
+        /// <value>
+        /// The user locking timers (when the lock is delayed).
+        /// Timers de bloqueio de usuários (Quando o bloqueio é atrasado)
+        /// </value>
         public Dictionary<String, Timer> Timers { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesktopLockTask"/> class.
+        /// Construtor
+        /// </summary>
         public DesktopLockTask()
         {
             this.Log = LogManager.GetLogger<DesktopLockTask>();
@@ -39,6 +91,10 @@ namespace Makro.Windows.DesktopService.Core
             this.Timers = new Dictionary<string,Timer>();
         }
 
+        /// <summary>
+        /// Executes this instance.
+        /// Executa a tarefa.
+        /// </summary>
         public void Execute()
         {
             try
@@ -77,6 +133,12 @@ namespace Makro.Windows.DesktopService.Core
             }
         }
 
+        /// <summary>
+        /// Adds the user lock.
+        /// Cria uma notificação de bloqueio de usuário.
+        /// Essa notificação poderá ser lida/consumida pelo Agent.
+        /// </summary>
+        /// <param name="user">The user.</param>
         private void AddUserLock(string user)
         {
             var client = GetHelperClient();
@@ -86,12 +148,22 @@ namespace Makro.Windows.DesktopService.Core
             }
         }
 
+        /// <summary>
+        /// Gets the helper client.
+        /// Obtem o client do serviço de notificação
+        /// </summary>
+        /// <returns></returns>
         private IDesktopServiceHelper GetHelperClient()
         {
             var c = ChannelFactory.CreateChannel();
             return c;
         }
 
+        /// <summary>
+        /// Locks the user.
+        /// Blqueia a sessão do usuário.
+        /// </summary>
+        /// <param name="state">The state.</param>
         private void LockUser(object state)
         {
             var s = state as ITerminalServicesSession;
@@ -103,14 +175,32 @@ namespace Makro.Windows.DesktopService.Core
             Timers.Remove(s.UserName);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Libera os objetos instanciados.
+        /// </summary>
         public void Dispose()
         {
             this.LogonHoursDataAccess.Dispose();
             this.Server.Dispose();
             this.ChannelFactory.Close();
         }
+        /// <summary>
+        /// Gets or sets the channel factory.
+        /// Obtém ou atribui o ChannelFactory do serviço de notificação
+        /// </summary>
+        /// <value>
+        /// The channel factory.
+        /// </value>
         public System.ServiceModel.ChannelFactory<IDesktopServiceHelper> ChannelFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the lock delay.
+        /// Obtem ou atribui o atraso (em minutos) de bloqueio. [AppSettings: DesktopLockDelay]
+        /// </summary>
+        /// <value>
+        /// The lock delay.
+        /// </value>
         public int LockDelay { get; set; }
     }
 }

@@ -9,6 +9,9 @@ using System.ServiceModel;
 
 namespace Makro.Windows.DesktopService.Console
 {
+    /// <summary>
+    /// Console application
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

@@ -12,13 +12,50 @@ using Common.Logging;
 
 namespace Makro.Windows.DesktopService.DataAccess
 {
+    /// <summary>
+    /// Access LogoHours info from AD
+    /// Acessa as informações LogonHours do AD
+    /// </summary>
     public class LogonHoursDataAccess : IDisposable
     {
+        /// <summary>
+        /// Gets or sets the connection.
+        /// </summary>
+        /// <value>
+        /// The connection.
+        /// </value>
+        [Obsolete]
         public DbConnection Connection { get; set; }
+        /// <summary>
+        /// Gets or sets the directory searcher.
+        /// Obtem ou atribiu o DirectorySearcher.
+        /// </summary>
+        /// <value>
+        /// The directory searcher.
+        /// </value>
         public DirectorySearcher DirectorySearcher { get; set; }
+        /// <summary>
+        /// Gets or sets the logon hours by user cache.
+        /// Obtem ou atribui o cache de LogonHours por usuário.
+        /// </summary>
+        /// <value>
+        /// The logon hours by user cache.
+        /// Cache de LogonHours por usuário
+        /// </value>
         public Dictionary<string, byte[]> LogonHoursByUserCache { get; set; }
+        /// <summary>
+        /// Gets or sets the log.
+        /// Obtem ou atribui o objeto de log.
+        /// </summary>
+        /// <value>
+        /// The log.
+        /// </value>
         public ILog Log { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogonHoursDataAccess"/> class.
+        /// Construtor.
+        /// </summary>
         public LogonHoursDataAccess()
         {
             this.Log = LogManager.GetLogger<LogonHoursDataAccess>();
@@ -26,6 +63,13 @@ namespace Makro.Windows.DesktopService.DataAccess
             this.LogonHoursByUserCache = new Dictionary<string, byte[]>();
         }
 
+        /// <summary>
+        /// Determines whether [the specified user] [is lockable].
+        /// Verifica se o usuário precisa ser bloqueado.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="delayInMinutes">The delay in minutes.</param>
+        /// <returns><c>true</c>: User must be locked</returns>
         public bool IsUserLockable(string user, int delayInMinutes)
         {
             byte[] bytes = null;
@@ -62,6 +106,13 @@ namespace Makro.Windows.DesktopService.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Gets the user logon hours.
+        /// Obtém a informação de LogonHours do AD para o [user] especificado.
+        /// AD path: LDAP://DC=MAKRO,DC=COM,DC=BR
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns><c>byte[]</c>: Retorno do AD - inalterado</returns>
         private byte[] GetUserLogonHours(string user)
         {
             var path = "LDAP://DC=MAKRO,DC=COM,DC=BR";
@@ -91,6 +142,13 @@ namespace Makro.Windows.DesktopService.DataAccess
             return bytes;
         }
 
+        /// <summary>
+        /// Gets the today work period.
+        /// Obtem o periodo de trabalho do dia atual.
+        /// </summary>
+        /// <param name="bytes">The bytes as AD has returned.</param>
+        /// <param name="dtStart">The inital DateTime.</param>
+        /// <param name="dtEnd">The final DateTime.</param>
         private void GetTodayWorkPeriod(byte[] bytes, out DateTime? dtStart, out DateTime? dtEnd)
         {
             var r = DecodeLogonHours(bytes);
@@ -110,6 +168,12 @@ namespace Makro.Windows.DesktopService.DataAccess
             }
         }
 
+        /// <summary>
+        /// Decodes the logon hours.
+        /// Interpreta as informações retornadas pelo AD e gera um mapeamento Dia/Periodo para os periodos de trabalho configurados no AD
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns></returns>
         private Dictionary<DayOfWeek, List<String>> DecodeLogonHours(byte[] bytes)
         {
             var currentOffset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now.ToLocalTime()).Hours;
@@ -180,6 +244,13 @@ namespace Makro.Windows.DesktopService.DataAccess
             return rtrn;
         }
 
+        /// <summary>
+        /// Decodes the day.
+        /// Interpreta um registro diário de LogonHours
+        /// </summary>
+        /// <param name="dayString">The day string.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
         private void DecodeDay(string dayString, out int? min, out int? max)
         {
             max = null;
@@ -195,6 +266,12 @@ namespace Makro.Windows.DesktopService.DataAccess
             }
         }
 
+        /// <summary>
+        /// To the bit string.
+        /// Converte uma cadeia de bytes em uma String 
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns></returns>
         private static string ToBitString(byte[] bytes)
         {
             var str = bytes.Aggregate("", (s, b) =>
@@ -205,6 +282,14 @@ namespace Makro.Windows.DesktopService.DataAccess
             return str;
         }
 
+        /// <summary>
+        /// Decodes the day.
+        /// </summary>
+        /// <param name="_0to7">The _0to7.</param>
+        /// <param name="_8to15">The _8to15.</param>
+        /// <param name="_16to23">The _16to23.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
         [Obsolete]
         private static void DecodeDay(byte _0to7, byte _8to15, byte _16to23, out int min, out int max)
         {
@@ -237,8 +322,14 @@ namespace Makro.Windows.DesktopService.DataAccess
             }
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Libera recursos utilizados.
+        /// </summary>
         public void Dispose()
         {
+            this.DirectorySearcher.Dispose();
+
             if (this.Connection != null)
                 this.Connection.Dispose();
         }

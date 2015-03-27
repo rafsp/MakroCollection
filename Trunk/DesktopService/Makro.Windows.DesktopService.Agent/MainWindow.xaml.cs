@@ -22,11 +22,15 @@ using System.Configuration;
 namespace Makro.Windows.DesktopService.Agent
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml.
+    /// Logica de interação para a MainWindow.xaml.
     /// </summary>
     public partial class MainWindow : Window
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +54,12 @@ namespace Makro.Windows.DesktopService.Agent
             this.Hide();
         }
 
+        /// <summary>
+        /// Handles the RunWorkerCompleted event of the BackGroundWorker control.
+        /// Shows the warning when a pending notification is found.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
         void BackGroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if ((bool)e.Result)
@@ -58,12 +68,23 @@ namespace Makro.Windows.DesktopService.Agent
             }
         }
 
+        /// <summary>
+        /// Handles the Elapsed event of the Timer control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ElapsedEventArgs"/> instance containing the event data.</param>
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!this.BackGroundWorker.IsBusy)
                 this.BackGroundWorker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Handles the DoWork event of the BackGroundWorker control.
+        /// Checks for pending notifications for each current active user.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DoWorkEventArgs"/> instance containing the event data.</param>
         void BackGroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (!IsRunning)
@@ -89,18 +110,54 @@ namespace Makro.Windows.DesktopService.Agent
             }
         }
 
+        /// <summary>
+        /// Gets or sets the back ground worker.
+        /// </summary>
+        /// <value>
+        /// The back ground worker.
+        /// </value>
         public BackgroundWorker BackGroundWorker { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is running.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is running; otherwise, <c>false</c>.
+        /// </value>
         public bool IsRunning { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timer.
+        /// </summary>
+        /// <value>
+        /// The timer.
+        /// </value>
         public System.Timers.Timer Timer { get; set; }
 
+        /// <summary>
+        /// Handles the Click event of the button1 control.
+        /// Hides the warning
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
         }
 
+        /// <summary>
+        /// Gets or sets the TSM.
+        /// </summary>
+        /// <value>
+        /// The TSM.
+        /// </value>
         public TerminalServicesManager TSM { get; set; }
 
+        /// <summary>
+        /// Gets or sets the synchronize.
+        /// </summary>
+        /// <value>
+        /// The synchronize.
+        /// </value>
         public SynchronizationContext Sync { get; set; }
     }
 }
