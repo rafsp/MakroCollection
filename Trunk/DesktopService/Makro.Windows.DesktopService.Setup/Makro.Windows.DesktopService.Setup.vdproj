@@ -541,7 +541,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.Core, Version=1.0.1.28988, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.Core, Version=1.0.1.27755, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_84824D43165CFD4EF51C39C859207E92"
@@ -665,7 +665,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.DataAccess, Version=1.0.1.28253, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Makro.Windows.DesktopService.DataAccess, Version=1.0.1.27754, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_D7A90546821F19A8F25FDF6517223CFD"
@@ -852,15 +852,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Makro Desktop Service"
-        "ProductCode" = "8:{810B1385-062F-489D-8A04-086BA2359729}"
-        "PackageCode" = "8:{E4767F06-A11C-45A3-91C2-A81A39E0EC7D}"
+        "ProductCode" = "8:{DD68B112-A0D3-4D15-8254-42EC58FB9922}"
+        "PackageCode" = "8:{4F1A3D41-FDAF-459B-A80E-23D6E599CEAB}"
         "UpgradeCode" = "8:{BABC6320-337B-4EC1-9087-127D889AD98B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.2.0"
+        "ProductVersion" = "8:1.3.0"
         "Manufacturer" = "8:Makro Atacadista SA"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://makro.servicedesk.net.br/"

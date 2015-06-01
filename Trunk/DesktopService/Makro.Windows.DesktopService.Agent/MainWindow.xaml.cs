@@ -27,6 +27,9 @@ namespace Makro.Windows.DesktopService.Agent
     /// </summary>
     public partial class MainWindow : Window
     {
+        protected override void OnActivated(EventArgs e)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -51,6 +54,7 @@ namespace Makro.Windows.DesktopService.Agent
 
             this.Sync = SynchronizationContext.Current;
 
+            this.Opacity = 0;
             this.Hide();
         }
 
@@ -64,7 +68,24 @@ namespace Makro.Windows.DesktopService.Agent
         {
             if ((bool)e.Result)
             {
-                this.Sync.Post(state => this.Show(), null);
+                this.Sync.Post(state =>
+                {
+                    this.Show();
+                    this.Opacity = 1;
+                    this.ShownAt = DateTime.Now;
+
+                }, null);
+            }
+            else
+            {
+                this.Sync.Post(state =>
+                {
+                    if (this.IsVisible && (!ShownAt.HasValue || (DateTime.Now - ShownAt.Value).TotalHours > .5))
+                    {
+                        this.Hide();
+                        this.Opacity = 0;
+                    }
+                }, null);
             }
         }
 
@@ -142,6 +163,8 @@ namespace Makro.Windows.DesktopService.Agent
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            this.Opacity = 0;
+            this.ShownAt = null;
         }
 
         /// <summary>
@@ -159,5 +182,7 @@ namespace Makro.Windows.DesktopService.Agent
         /// The synchronize.
         /// </value>
         public SynchronizationContext Sync { get; set; }
+
+        public DateTime? ShownAt { get; set; }
     }
 }
